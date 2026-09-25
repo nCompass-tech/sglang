@@ -89,6 +89,11 @@ class GenerationBatchResult:
     # Next-iter seq_lens; published via on_publish.
     new_seq_lens: Optional[torch.Tensor] = None
 
+    # Verify-merged mixed step: rows [0, num_prefill_rows) of the batch are
+    # prefill rows (one sampled token each in next_token_ids); the rest are
+    # verify rows (stride speculative_num_draft_tokens, accept_lens per row).
+    num_prefill_rows: Optional[int] = None
+
     # relay path: forward stream -> next step forward
     next_draft_input: Optional[EagleDraftInput] = None
 
